@@ -26,7 +26,8 @@
 	"require": {
 		"php": ">=5.3.10",
 		"croogo/croogo": "~2.2",
-		"cakephp/cakephp": "~2.5"
+		"cakephp/cakephp": "~2.5",
+        "holt59/cakephp-bootstrap3-helpers": "dev-master"
 	},
 	"suggest": {
 		"croogo/locale": "~1.0"

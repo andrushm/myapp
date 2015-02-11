@@ -16,13 +16,29 @@ class IngredientsController extends AppController {
  */
 	public $components = array('Paginator', 'Session');
 
+    public $helpers = array(
+        'BootstrapHtml', 'BootstrapModal', 'BootstrapForm', 'BootstrapNavbar'
+//        'Html' => array(
+//            'className' => 'Bootstrap3.BootstrapHtml'
+//        ),
+//        'Form' => array(
+//            'className' => 'Bootstrap3.BootstrapForm'
+//        ),
+//        'Modal' => array(
+//            'className' => 'Bootstrap3.BootstrapModal'
+//        )
+    );
+
 /**
  * index method
  *
  * @return void
  */
 	public function index() {
+
 		$this->Ingredient->recursive = 0;
+//        $this->Session->setFlash('alert');
+//        $this->Session->setFlash('Something good.', 'default', array(), 'success');
 		$this->set('ingredients', $this->paginate());
 	}
 

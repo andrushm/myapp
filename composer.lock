@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7f25a3cd56f47a426fd105097f46da99",
+    "hash": "2acb7d6e1ee1892fe3ad91ddfdd6a2d0",
     "packages": [
         {
             "name": "cakedc/migrations",
@@ -319,6 +319,39 @@
             "description": "Croogo - Open Source CMS built for everyone",
             "homepage": "http://github.com/croogo/croogo",
             "time": "2015-01-12 01:17:35"
+        },
+        {
+            "name": "holt59/cakephp-bootstrap3-helpers",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Holt59/cakephp-bootstrap3-helpers.git",
+                "reference": "74ea22bc2f59072c59ed9195fa0f492523bf07cb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Holt59/cakephp-bootstrap3-helpers/zipball/74ea22bc2f59072c59ed9195fa0f492523bf07cb",
+                "reference": "74ea22bc2f59072c59ed9195fa0f492523bf07cb",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "*"
+            },
+            "type": "cakephp-plugin",
+            "extra": {
+                "installer-name": "Bootstrap3"
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache"
+            ],
+            "description": "Bootstrap 3 Helpers for CakePHP 2.x",
+            "keywords": [
+                "bootstrap",
+                "cakephp",
+                "helper"
+            ],
+            "time": "2014-10-05 17:07:12"
         }
     ],
     "packages-dev": [
@@ -739,6 +772,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "holt59/cakephp-bootstrap3-helpers": 20,
         "phpunit/phpunit": 20
     },
     "prefer-stable": false,

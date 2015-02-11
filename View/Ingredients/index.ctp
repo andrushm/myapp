@@ -1,4 +1,9 @@
+
 <div class="ingredients index">
+    <?php
+
+    echo $this->BootstrapHtml->label('My Label', 'primary') ;
+    echo $this->BootstrapHtml->badge('1') ;?>
 	<h2><?php echo __('Ingredients'); ?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<thead>
