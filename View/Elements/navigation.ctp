@@ -260,16 +260,29 @@
 <!-- /input-group -->
 <!--            </li>-->
             <li>
-                <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                <a href="<?php echo $this->Html->url(array('plugin'=>null,'controller'=>'Dashboard', 'action'=>'index')); ?>"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+<!--                --><?php //echo $this->Html->url(__('Dashboard'), array('plugin'=>null,'controller'=>'Dashboard', 'action'=>'index'), array('class'=>'fa fa-dashboard fa-fw'));?>
             </li>
             <li>
-                <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Recipes<span class="fa arrow"></span></a>
+                <a href="#"><i class="fa  fa-th-list fa-fw"></i> Recipes<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
                         <?php echo $this->Html->link(__('List'), array('plugin'=>null,'controller'=>'Recipes', 'action'=>'index'));?>
                     </li>
                     <li>
                         <?php echo $this->Html->link(__('Add'), array('plugin'=>null, 'controller'=>'Recipes', 'action'=>'add')); ?>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-tachometer fa-fw"></i> Energetics<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <?php echo $this->Html->link(__('Online'), array('plugin'=>null,'controller'=>'Powers', 'action'=>'index'));?>
+                    </li>
+                    <li>
+                        <?php echo $this->Html->link(__('Reports'), array('plugin'=>null, 'controller'=>'Powers', 'action'=>'report')); ?>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->

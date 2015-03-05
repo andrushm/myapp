@@ -26,3 +26,8 @@ if (file_exists(APP . 'Config' . DS . 'croogo.php')) {
 		)
 	));
 }
+
+define('UNIX_DAY', 24*60*60);
+define('UNIX_WEEK', UNIX_DAY * 7);
+define('CONNECT_ACTIVE', 192);
+define('NUMBER_OF_COUNTERS', 10);

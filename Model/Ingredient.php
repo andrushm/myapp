@@ -47,4 +47,15 @@ class Ingredient extends AppModel {
 			),
 		),
 	);
+
+
+    public $findMethods = array('list_for_select' =>  true);
+
+    protected function _findList_for_select($state, $query, $results = array()) {
+        if ($state === 'before') {
+            $query['conditions']['Article.published'] = true;
+            return $query;
+        }
+        return $results;
+    }
 }

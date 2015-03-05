@@ -87,10 +87,14 @@ show up on all of your views, include it here -->
 <div id="footer">...</div>
 <?php
 echo $this->Html->script('jquery-1.11.2.min');
+echo $this->Html->script('jquery.dataTables.min');
+echo $this->Html->script('dygraph-combined');
 echo $this->Html->script('bootstrap.min');
 echo $this->Html->script('metisMenu.min');
 echo $this->Html->script('morris.min');
 echo $this->Html->script('sb-admin-2');
+echo $this->Html->script('ajax');
+echo $this->Html->script('ready');
 ?>
 </body>
 </html>

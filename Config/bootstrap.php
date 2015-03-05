@@ -55,6 +55,8 @@ if (file_exists(APP . 'Vendor/autoload.php')) {
  * Inflector::rules('plural', array('rules' => array(), 'irregular' => array(), 'uninflected' => array()));
  *
  */
+
+CakePlugin::load('DebugKit');
 App::build(array(
 	'Plugin' => array(APP . 'Vendor' . DS . 'croogo' . DS . 'croogo' . DS ),
 ), App::APPEND);

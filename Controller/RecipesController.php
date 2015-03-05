@@ -16,13 +16,14 @@ class RecipesController extends AppController {
  */
 	public $components = array('Paginator', 'Session');
 
-    public $uses = array('Recipe', 'RecipeIngredient');
+    public $uses = array('Recipe', 'RecipeIngredient', 'Ingredient');
 /**
  * index method
  *
  * @return void
  */
 	public function index() {
+//        $this->Session->setFlash('Something good.', 'default', array(), 'success');
 		$this->Recipe->recursive = 2;
 //        $this->paginate['fields'] = array('Recipe.name');
 //        $t = $this->Recipe->find('all',array('recursive'=>2));
@@ -61,7 +62,6 @@ class RecipesController extends AppController {
 				$this->Session->setFlash(__d('croogo', 'The recipe has been saved'), 'default', array('class' => 'success'));
 				$this->redirect(array('action' => 'index'));
 			} else {
-                die('blya');
 				$this->Session->setFlash('alert');//, 'The recipe could not be saved. Please, try again.'), 'default', array('class' => 'error'));
 			}
 		}
@@ -75,26 +75,56 @@ class RecipesController extends AppController {
  * @return void
  */
 	public function edit($id = null) {
-//        App::uses('RecipeIngredient','Model');
+
 		if (!$this->Recipe->exists($id)) {
 			throw new NotFoundException(__d('croogo', 'Invalid recipe'));
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
-//            var_dump($this->request->data['RecipeIngredient']);die;
-//            $this->Recipe->save($this->request->data['Recipe']) &&
-			if ( $this->RecipeIngredient->save($this->request->data['RecipeIngredient'])) {
-				$this->Session->setFlash(__d('croogo', 'The recipe has been saved'), 'default', array('class' => 'success'));
+			if ( $this->Recipe->saveAll($this->request->data)) {
+                $this->Session->setFlash('The recipe has been saved!', 'default', array(), 'success');
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__d('croogo', 'The recipe could not be saved. Please, try again.'), 'default', array('class' => 'error'));
+                $this->Session->setFlash('The recipe could not be saved. Please, try again.', 'default', array(), 'alert');
+
 			}
-		} else {
+		}; //else {
 			$options = array('conditions' => array('Recipe.' . $this->Recipe->primaryKey => $id, ),'recursive'=>2);
-//            var_dump($this->Recipe->find('first', $options));die;
 			$this->request->data = $this->Recipe->find('first', $options);
-            pr($this->request->data);
-		}
+        $ingredients = $this->Ingredient->find('all', array('recursive'=>'0'));
+        $list = array();
+        foreach($ingredients as $ingredient){
+            $list[$ingredient['Ingredient']['id']] = $ingredient['Ingredient']['name'].' ('.$ingredient['Ingredient']['dimension'].')';
+        }
+//        pr($list);die;
+            $this->set('Ingredient',$list);
+//		}
 	}
+
+    /**
+     * add ingredient method
+     */
+    public function add_ingredient(){
+//        pr($this->request->data);die;
+        if ($this->request->is('post') || $this->request->is('put')) {
+            if ($this->RecipeIngredient->save( $this->request->data)){
+                $this->redirect(array('action'=>'edit', $this->request->data['RecipeIngredient']['recipe_id']));
+            }
+        }
+
+    }
+
+    /*
+     *
+     */
+    public function del_ingredient($id,$ingredient_id){
+
+        if (!empty($id)){
+            if ($this->RecipeIngredient->delete($ingredient_id, false)){
+                $this->redirect(array('action'=>'edit', $id));
+            }
+        }
+
+    }
 
 /**
  * delete method
