@@ -16,6 +16,7 @@ App::uses('AppController', 'Controller');
  */
 class PowersController extends AppController {
 
+    public $uses = array('Power','PowerMeters');
 
     public function index(){
 
@@ -42,9 +43,9 @@ class PowersController extends AppController {
     }
 
     public function report(){
-        $result = $this->Power->getLastYears();
-
-        $this->set('statistics', $result);
+//        $result = $this->Power->getLastYears();
+//
+//        $this->set('statistics', $result);
 
 
 //        var_dump($result);
@@ -52,10 +53,26 @@ class PowersController extends AppController {
 
     public function getLastYears(){
         $result = $this->Power->getLastYears();
-//        var_dump($result);die;
-        $recordsTotal = count($result);
+        // calculate total per months
+        $suma = array(0 => '', 1 => 'Total: ');
+        foreach($result['data'] as $data){
+            $t_count = count($data);
+            for ($i = 2; $i < $t_count; $i++)
+                if (empty($suma[$i])) {
+                    $suma[$i] = $data[$i];
+                } else {
+                    $suma[$i] += $data[$i];
+                }
+        }
+        $result['data'][] = $suma;
+        //
+
+//        var_dump($result['data'],$suma);die;
+
+        $recordsTotal = count($result['data']);
 //        $output = array("recordsTotal" => 10,                                  //"draw" => $get['draw'] + 1,
 //                        "recordsFiltered" => 10, //);
+        array_unshift($result['title'],array('title' => 'ID'),array('title' => 'Name'));
         $output = array(
                     "draw" => 1,
                     "recordsTotal" => $recordsTotal,
@@ -114,8 +131,22 @@ class PowersController extends AppController {
 
     public function getLastDayRecords(){
         $last_meters = $this->Power->getLastDayRecords();
-//        var_dump($last_meters);
-        echo json_encode($last_meters); //array('Draw'=>1 ,'aaData' =>$last_meters));
+
+//        echo $this->arrayToCsv($last_meters);
+//          echo $last_meters;
+
+//        App::uses('PowerMeters', 'Model');
+
+        $pm = $this->PowerMeters->find('list', array('fields' => array('PowerMeters.name')));
+        $res[] = 'Data';
+        foreach($pm as $key => $val){
+            $res[] = $key.'.'.$val;
+        }
+//        var_dump($res);die;
+        $output['title'] = $res;
+        $output['data'] = $last_meters;
+        echo json_encode($output); //array('Draw'=>1 ,'aaData' =>$last_meters));
+//        echo "[[12,32],[152,322],[132,324],[712,329],[912,322],[172,323],[132,342]]";
 
 //        echo '{
 //                "label": "Europe (EU27)",
@@ -126,5 +157,31 @@ class PowersController extends AppController {
 
     }
 
+    /**
+     * Formats a line (passed as a fields  array) as CSV and returns the CSV as a string.
+     * Adapted from http://us3.php.net/manual/en/function.fputcsv.php#87120
+     */
+    protected function arrayToCsv( array &$fields, $delimiter = ';', $enclosure = '"', $encloseAll = false, $nullToMysqlNull = false ) {
+        $delimiter_esc = preg_quote($delimiter, '/');
+        $enclosure_esc = preg_quote($enclosure, '/');
+
+        $output = array();
+        foreach ( $fields as $field ) {
+            if ($field === null && $nullToMysqlNull) {
+                $output[] = 'NULL';
+                continue;
+            }
+
+            // Enclose fields containing $delimiter, $enclosure or whitespace
+            if ( $encloseAll || preg_match( "/(?:${delimiter_esc}|${enclosure_esc}|\s)/", $field ) ) {
+                $output[] = $enclosure . str_replace($enclosure, $enclosure . $enclosure, $field) . $enclosure;
+            }
+            else {
+                $output[] = $field;
+            }
+        }
+
+        return implode( $delimiter, $output );
+    }
 
 }

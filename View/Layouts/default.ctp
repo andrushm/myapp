@@ -88,7 +88,16 @@ show up on all of your views, include it here -->
 <?php
 echo $this->Html->script('jquery-1.11.2.min');
 echo $this->Html->script('jquery.dataTables.min');
-echo $this->Html->script('dygraph-combined');
+echo $this->Html->script('dygraph-combined-dev');
+echo $this->Html->script('flot/excanvas.min');
+echo $this->Html->script('flot/jquery.flot');
+echo $this->Html->script('flot/jquery.flot.min');
+echo $this->Html->script('flot/jquery.flot.symbol');
+echo $this->Html->script('flot/jquery.flot.resize');
+echo $this->Html->script('flot/jquery.flot.time');
+//echo $this->Html->script('flot/jquery.flot.axislabels');
+echo $this->Html->script('flot/jquery.flot.pie');
+//echo $this->Html->script('elycharts');
 echo $this->Html->script('bootstrap.min');
 echo $this->Html->script('metisMenu.min');
 echo $this->Html->script('morris.min');

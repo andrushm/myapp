@@ -49,4 +49,22 @@
             </table>
         </div>
     </div>
-    <div id="graphdiv" style="width:900px; height:700px;"></div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Bar Chart Example
+        </div>
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+                <div id="graphdiv"></div>
+        </div>
+        <!-- /.panel-body -->
+    </div>
+    <!-- /.panel -->
+
+    <canvas id="myChart" width="400" height="400"></canvas>
+<!--    <div id="graphdiv" style="width:900px; height:700px;"></div>-->
+
+
+<style>
+    #graphdiv {width:900px; height:700px;}
+</style>

@@ -13,37 +13,33 @@
 </div>
 <div class="col-lg-12">
     <table id="statistic" class="table table-hover table-bordered" cellspacing="0" width="100%">
-        <thead>
-        <tr>
-            <th>Device_ID</th>
-            <th>Name</th>
-        </tr>
-        </thead>
-
+        <thead></thead>
+        <tfoot></tfoot>
     </table>
 
-<table class="table table-hover table-bordered" cellspacing="0" width="100%">
-    <thead>
-    <tr>
-        <th>Device_ID</th>
-        <th>Name</th>
-        <?php foreach($statistics['months'] as $res){
-                echo "<th>$res</th>";
-              };
-        ?>
-    </tr>
-    </thead>
-
-    <?php foreach($statistics['data'] as $res){
-//        var_dump($res);
-            echo "<tr>";
-            foreach ($res[0] as $row){
-                echo "<td>$row</td>";
-            }
-            echo "</tr>";
-        }
-    ?>
-
-</table>
+<!--<table class="table table-hover table-bordered" cellspacing="0" width="100%">-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--        <th>Device_ID</th>-->
+<!--        <th>Name</th>-->
+<!--        --><?php //foreach($statistics['months'] as $res){
+//                echo "<th>$res</th>";
+//              };
+//        ?>
+<!--    </tr>-->
+<!--    </thead>-->
+<!---->
+<!--    --><?php //foreach($statistics['data'] as $res){
+////        var_dump($res);
+//            echo "<tr>";
+//            foreach ($res as $row){
+//                echo "<td>$row</td>";
+//            }
+//            echo "</tr>";
+//        }
+//    ?>
+<!---->
+<!--</table>-->
 </div>
-<div id="graphdiv" style="width:900px; height:700px;"></div>
+<div id="graphdiv" ></div>
+<!--style="width:900px; height:700px;"-->
